@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{padding:0;margin:0;}
+        .wrap{width:500px;height:500px;margin:20px auto;position:relative;}
+        .wrap input[type=text]{ color:#ccc;}
+        .wrap span{position:absolute;font-size:12px;display:none;color:#FF261A;}
+    </style>
+</head>
+<script src="jquery-3.1.0.min.js"></script>
+<body>
+<div class="wrap">
+    <p>手机号码：</p> <input type="text" value="请输入手机号码"/><br/>
+    <span>手机号码格式错误！！！</span><br/>
+    <p>身份证：</p><input type="text"value="请输入身份证"/><br/>
+    <span>身份证格式错误！！！</span><br/>
+    <p>QQ号：</p><input type="text"value="请输入QQ号"/><br/>
+    <span>QQ号格式错误！！！</span><br/>
+    <p>密码：</p><input type="password"/><br/>
+    <span>请输入密码！！！</span><br/>
+    <p>确认密码：</p><input type="password"/><br/>
+    <span>两次密码不一样！！！</span><br/>
+    <p>年龄：</p><input type="text"value="请输入年龄"/><br/>
+    <span>年龄10-99岁之间！！！</span><br/>
+    <input type="submit" />
+</div>
+</body>
+<script>
+    $('input[type=text]').on('click',function(){
+        $(this).val("").css('color','#000');
+    })
+    var re = {
+        phone :/^(13[0-9]|15[0-9]|18[0-9])\d{8}$/,
+        number:/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
+        qq:/^[1-9]\d{4,11}$/,
+        password:/^[a-zA-Z0-9]([a-z0-9A-Z.]\w+).{6,16}$/,
+        age:/^[1-9]+[0-9]{1}$/,
+
+
+    }
+    $('input[type=submit]').on('click',function(){
+        if(!re.phone.test($('input').eq(0).val())){
+            $('span').eq(0).show();
+            //return false;
+        }
+        if(!re.number.test($('input').eq(1).val())){
+            $('span').eq(1).show();
+        }
+        if(!re.qq.test($('input').eq(2).val())){
+            $('span').eq(2).show();
+        }
+        if(!re.password.test($('input').eq(3).val())){
+            $('span').eq(3).show();
+        }
+        if(re.password.test($('input').eq(4).val()) != re.password.test($('input').eq(3).val())){
+            $('span').eq(4).show();
+        }
+        if(!re.age.test($('input').eq(5).val())){
+            $('span').eq(5).show();
+        }
+    })
+</script>
+</html>
